@@ -3,15 +3,14 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def login_view(request):
-    username = "some_user" # request.POST["username"]
-    password = "some_password" # request.POST["password"]
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        print("User logged in")
-        return redirect("/")
-    else:
-        # return an 'invalid login' error message.
-        print("Invalid login")
+    if request.method == "POST":
+        username =  request.POST.get("username") or None
+        password =  request.POST.get("password") or None
+        if all([username, password]):
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                print("User logged in")
+                return redirect("/")
 
     return render(request, "auth/login.html", {})
