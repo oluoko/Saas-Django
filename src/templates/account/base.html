@@ -1,28 +1,25 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            {% block head_title %}{% endblock %} - Brian's SaaS
-        </title>
-        <link rel="stylesheet" href="{% static 'allauth_ui/output.css' %}">
-        {% block extra_head %}{% endblock %}
-        {% include 'base/css.html' %}
-    </head>
-    <body>
-        {% include 'nav/navbar.html' %}
-        {% include 'base/messages.html' with messages=messages %}
-        {% block content %}
-            <div class="flex flex-col items-center justify-center w-screen h-screen text-gray-700 bg-gray-200">
-                <div class="flex flex-col items-center p-12 bg-white rounded shadow-lg grow-0">
-                    {% block whitebox %}{% endblock %}
-                </div>
-            </div>
-        {% endblock %}
-
-        {% include 'base/js.html' %}
-    </body>
+  <head>
+    <title>{% block head_title %}{% endblock head_title%} - Brian's SaaS</title>
+    <link rel="stylesheet" href="{% static 'allauth_ui/output.css' %}" />
+    {% block extra_head %}{% endblock %} {% include 'base/css.html' %}
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    {% include 'nav/navbar.html' %} {% include 'base/messages.html' with
+    messages=messages %}
+    <div
+      class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+    >
+      <div class="max-w-md w-full">
+        <div
+          class="bg-white py-8 px-6 shadow-lg rounded-lg border border-gray-200"
+        >
+          {% block whitebox %}{% endblock %}
+        </div>
+      </div>
+    </div>
+    {% include 'base/js.html' %}
+  </body>
 </html>
