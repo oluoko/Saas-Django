@@ -7,8 +7,10 @@
 <body class="bg-gray-50 min-h-screen">
     {% include 'nav/navbar.html' %}
     {% include 'base/messages.html' with messages=messages %}
-    {% block content %}
-    {% endblock content %}
+    <main class="container mx-auto px-4 py-8">
+        {% block content %}
+        {% endblock content %}
+    </main>
     {% include 'base/js.html' %}
 </body>
 </html>

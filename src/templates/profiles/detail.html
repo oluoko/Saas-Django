@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}{{ instance.username }} - {{ block.super }}{% endblock head_title %}
+
+
+{% block content %}
+<h1 class="text-lg font-medium">{{ instance.username }}'s Profile</h1>
+
+{% if perms.auth or owner %}
+{% if perms.auth.view_user or owner %}
+<div>
+    <ul>
+        <li>Email: {{ instance.email }}</li>
+        <li>Username: {{ instance.username }}</li>
+        <li>First Name: {{ instance.first_name }}</li>
+        <li>Last Name: {{ instance.last_name }}</li>
+        <li>Date Joined: {{ instance.date_joined }}</li>
+        <li>Last Login: {{ instance.last_login }}</li>
+    </ul>
+</div>
+{% else %}
+    <p>You do not have permission to view the user list.</p>
+{% endif %}
+{% endif %}
+
+{% endblock content %}
+
