@@ -76,7 +76,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+<<<<<<< HEAD
     'allauth.socialaccount.providers.google',
+=======
+>>>>>>> 0f884b51a41b2fb31edc2d8b39dc2e03240e2c07
     "widget_tweaks",
     "slippers"
 ]
@@ -195,6 +198,7 @@ AUTHENTICATION_BACKENDS = [
 SOCIALACCOUNT_PROVIDERS = {
     "github": {
         "VERIFIED_EMAIL": True
+<<<<<<< HEAD
         # "SCOPE": [
         #     "user:email",
         # ],
@@ -205,6 +209,8 @@ SOCIALACCOUNT_PROVIDERS = {
             "profile",
             "email",
         ],
+=======
+>>>>>>> 0f884b51a41b2fb31edc2d8b39dc2e03240e2c07
     }
 }
 
