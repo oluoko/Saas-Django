@@ -19,7 +19,7 @@ def about_view(request, *args, **kwargs):
         percent = (page_qs.count() * 100.0) / qs.count()
     except:
         percent = 0
-    my_title = "My Page"
+    my_title = "Home"
     html_template = "home.html"
     my_context = {
         "page_title": my_title,
@@ -32,19 +32,33 @@ def about_view(request, *args, **kwargs):
 
 
 def my_old_home_page_view(request, *args, **kwargs):
-    my_title = "My Page"
+    my_title = "Home"
     my_context = {
         "page_title": my_title
     }
     html_ = """
     <!DOCTYPE html>
-<html>
-
-<body>
+    <html>
+    <body>
     <h1>{page_title} anything?</h1>
-</body>
-</html>    
-""".format(**my_context) # page_title=my_title
+    </body>
+    </html>    
+    """.format(**my_context) # page_title=my_title
     # html_file_path = this_dir / "home.html"
     # html_ = html_file_path.read_text()
     return HttpResponse(html_)
+
+VALID_CODE = "abc123"
+
+
+def pw_protected_view(request, *args, **kwargs):
+    is_allowed = request.session.get('protected_page_allowed') or 0
+    print(request.session.get('protected_page_allowed'), type(request.session.get('protected_page_allowed')))
+    if request.method == "POST":
+        user_pw_sent = request.POST.get("code") or None
+        if user_pw_sent == VALID_CODE:
+            is_allowed = 1
+            request.session['protected_page_allowed'] = is_allowed
+    if is_allowed:
+        return render(request, "protected/view.html", {})
+    return render(request, "protected/entry.html", {})
