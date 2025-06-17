@@ -5,23 +5,30 @@
 
 
 {% block content %}
-<h1 class="text-lg font-medium">{{ instance.username }}'s Profile</h1>
+<h1 class="text-xl font-bold mb-4">{{ instance.username }}'s Profile</h1>
 
 {% if perms.auth or owner %}
-{% if perms.auth.view_user or owner %}
-<div>
-    <ul>
-        <li>Email: {{ instance.email }}</li>
-        <li>Username: {{ instance.username }}</li>
-        <li>First Name: {{ instance.first_name }}</li>
-        <li>Last Name: {{ instance.last_name }}</li>
-        <li>Date Joined: {{ instance.date_joined }}</li>
-        <li>Last Login: {{ instance.last_login }}</li>
-    </ul>
-</div>
+    {% if perms.auth.view_user or owner %}
+        {% if owner%}
+            <p class="text-sm text-gray-600">Welcome to your profile.</p>
+        {% else %}
+            <p class="text-sm text-gray-600">Viewing profile of {{ instance.username }}.</p>
+        {% endif %}
+        <div>
+            <ul>
+                <li>Email: {{ instance.email }}</li>
+                <li>Username: {{ instance.username }}</li>
+                <li>First Name: {{ instance.first_name }}</li>
+                <li>Last Name: {{ instance.last_name }}</li>
+                <li>Date Joined: {{ instance.date_joined }}</li>
+                <li>Last Login: {{ instance.last_login }}</li>
+            </ul>
+        </div>
+    {% else %}
+        <p>You do not have permission to view the user list.</p>
+    {% endif %}
 {% else %}
-    <p>You do not have permission to view the user list.</p>
-{% endif %}
+    <p>You do not have permission to view this profile.</p>
 {% endif %}
 
 {% endblock content %}
